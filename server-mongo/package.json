@@ -1,6 +1,6 @@
 {
-  "name": "nationalpark-mongodb",
-  "subdomain": "nationalpark-mongodb",
+  "name": "ficbook-mongodb",
+  "subdomain": "ficbook-mongodb",
   "scripts": {
     "start": "server-mongo.js"
   },

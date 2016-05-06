@@ -79,6 +79,34 @@ var postMessage = function(req, res, next) {
   });
 }
 
+// This function is responsible for returning all entries for the Message model
+var getStories = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  
+  console.log("mongodbServer getMessages");
+
+  Story.find().limit(20).sort('date', -1).execFind(function (arr,data) {
+    res.send(data);
+  });
+}
+
+var postStories = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  
+  var story = new Story(); 
+  
+  console.log("mongodbServer postStory: " + req.params.message);
+
+  story.title = req.params.title;
+  story.content = req.params.content;
+  story.user_id = req.params.user_id; // = this user
+  story.date = new Date();
+
+  story.save(function () {
+    res.send(req.body);
+  });
+}
+
 mongodbServer.listen(mongodbPort, function() {
   
   var consoleMessage = '\n MongoDb, Mongoose, Restify, and Backbone Tutorial'
@@ -94,3 +122,11 @@ mongodbServer.listen(mongodbPort, function() {
 mongodbServer.get('/messages', getMessages);
 mongodbServer.post('/messages', postMessage);
 
+mongodbServer.get('/stories', getStories);
+mongodbServer.post('/stories', postStory);
+
+mongodbServer.get('/characters', getCharacters);
+mongodbServer.post('/characters', postCharacter);
+
+mongodbServer.get('/comments', getComments);
+mongodbServer.post('/comments', postComment);

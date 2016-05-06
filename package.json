@@ -1,6 +1,6 @@
 {
-  "name": "nationalpark",
-  "subdomain": "nationalpark",
+  "name": "ficbook",
+  "subdomain": "ficbook",
   "scripts": {
     "start": "server-http.js"
   },
